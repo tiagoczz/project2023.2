@@ -100,7 +100,7 @@ while True:
                 else:
                     print('Usuário incorreto.')
     elif choice == '3':
-        name0 = input('Nome:')
+        name = input('Nome:')
         usuario = input('Crie um usuário:')
         if usuario in adms or usuario in users:
             print('Usuário repetido, cadastre outro.')
