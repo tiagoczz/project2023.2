@@ -7,10 +7,10 @@ emailUSER = []
 passwordUSER = []
 while True:
     print('----------MENU-----------')
-    print('1-Cadastrar ADM')
-    print('2-Login')
-    print('3-Cadastrar usuário')
-    print('0-Sair')
+    print('[1]Cadastrar ADM')
+    print('[2]Login')
+    print('[3]Cadastrar usuário')
+    print('[0]Sair')
     print('-'*25)
     choice = input()
     if choice == '1':
@@ -39,18 +39,18 @@ while True:
         password = int(input('Senha:'))
         logged = False
         for i in adms:
-            if adms.count(usuario) == 1:
+            if adms.count(usuario) >= 1:
                 for j in passwordADMs:
-                    if passwordADMs.count(password) == 1:
+                    if passwordADMs.count(password) >= 1:
                         logged = True
                         while True:
                             print('-'*20)
-                            print('1-Inserir notícia')
-                            print('2-Listar notícias')
-                            print('3-Excluir notícia')
-                            print('4-Editar notícia')
-                            print('5-Buscar notícia')
-                            print('6-Logout')
+                            print('[1]Inserir notícia')
+                            print('[2]Listar notícias')
+                            print('[3]Excluir notícia')
+                            print('[4]Editar notícia')
+                            print('[5]Buscar notícia')
+                            print('[6]Logout')
                             print('-'*20)
                             choice = input()
                             if choice == '1':
@@ -73,16 +73,16 @@ while True:
                 print('Usuário incorreto.')
         if not logged:
             for i in users:
-                if users.count(usuario) == 1:
+                if users.count(usuario) >= 1:
                     for j in passwordUSER:
-                        if passwordUSER.count(password) == 1:
+                        if passwordUSER.count(password) >= 1:
                             logged = True
                             while True:
                                 print('-'*20)
-                                print('1-Buscar notícia')
-                                print('2-Comentar notícia')
-                                print('3-Curtir notícia')
-                                print('4-Logout')
+                                print('[1]Buscar notícia')
+                                print('[2]Comentar notícia')
+                                print('[3]Curtir notícia')
+                                print('[4]Logout')
                                 print('-'*20)
                                 choice = input()
                                 if choice == '1':
