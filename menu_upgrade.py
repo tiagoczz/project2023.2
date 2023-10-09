@@ -6,10 +6,12 @@ users = []
 emailUSER = []
 passwordUSER = []
 while True:
+    print('----------MENU-----------')
     print('1-Cadastrar ADM')
     print('2-Login')
     print('3-Cadastrar usuário')
     print('0-Sair')
+    print('-'*25)
     choice = input()
     if choice == '1':
         name = input('Nome:')
@@ -42,12 +44,14 @@ while True:
                     if passwordADMs.count(password) == 1:
                         logged = True
                         while True:
+                            print('-'*20)
                             print('1-Inserir notícia')
                             print('2-Listar notícias')
                             print('3-Excluir notícia')
                             print('4-Editar notícia')
                             print('5-Buscar notícia')
                             print('6-Logout')
+                            print('-'*20)
                             choice = input()
                             if choice == '1':
                                 print('Aguarde futuras atualizações.')
@@ -74,10 +78,12 @@ while True:
                         if passwordUSER.count(password) == 1:
                             logged = True
                             while True:
+                                print('-'*20)
                                 print('1-Buscar notícia')
                                 print('2-Comentar notícia')
                                 print('3-Curtir notícia')
                                 print('4-Logout')
+                                print('-'*20)
                                 choice = input()
                                 if choice == '1':
                                     print('Aguarde futuras atualizações.')
