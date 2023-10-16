@@ -67,17 +67,47 @@ while True:
                             break
 
                 elif choice == '2':
-                    print('Aguarde futuras atualizações.')
+                    for i in all_news:
+                        print(all_news[i])
+
                 elif choice == '3':
-                    print('Aguarde futuras atualizações.')
+                    while True:
+                        remove_id = int(input('Informe o ID da notícia para remove-la:'))
+                        if remove_id in all_news:
+                            all_news.pop(remove_id)
+                        else:
+                            print('ID inexistente!')
+                            question = input('Ainda quer remover uma noticia? sim/nao')
+                            if question == 'nao':
+                                break
+
                 elif choice == '4':
-                    print('Aguarde futuras atualizações.')
+                    while True:
+                        edit_id = int(input('Informe o ID da notícia que deseja editar:'))
+                        if edit_id in all_news:
+                            all_news.pop(edit_id)
+                            question4 = input('Edite a notícia:')
+                            all_news[edit_id] = [question4]
+                            yes_no = input('Deseja editar mais alguma coisa? sim/nao')
+                            if yes_no == 'nao':
+                                break
+
                 elif choice == '5':
-                    print('Aguarde futuras atualizações.')
+                    while True:
+                        list_news = int(input('Informe o ID da notícia para busca-la:'))
+                        if list_news in all_news:
+                            print(all_news[list_news])
+                        else:
+                            print('Digite algo válido')
+                            question = input('Deseja continuar procurando? sim/nao')
+                            if question == 'nao':
+                                break
+
                 elif choice == '6':
                     break
                 else:
                     print('Não existe esse opção.')
+
         elif usuario in users and password in passwordUSER:
             logged = True
             while True:
