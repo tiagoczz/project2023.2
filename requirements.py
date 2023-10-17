@@ -7,12 +7,14 @@ emailUSER = []
 passwordUSER = []
 all_news = {}
 while True:
-    print('-----------MENU-----------')
-    print('[1]Cadastrar Administrador')
-    print('[2]Login')
-    print('[3]Cadastrar usuário')
-    print('[0]Sair')
-    print('-'*26)
+    print(
+        '___________MENU___________\n'
+        '[1]Cadastrar Administrador\n'
+        '[2]Login\n'
+        '[3]Cadastrar usuário\n'
+        '[0]Sair'
+    )
+    print('_'*26)
     choice = input()
     if choice == '1':
         name = input('Nome:')
@@ -41,7 +43,7 @@ while True:
         if usuario in adms and password in passwordADMs:
             logged = True
             while True:
-                print('-'*26)
+                print('_'*26)
                 print(
                     '[1]Inserir notícia\n'
                     '[2]Listar notícias\n'
@@ -50,7 +52,7 @@ while True:
                     '[5]Buscar notícia\n'
                     '[6]Logout'
                 )
-                print('-'*26)
+                print('_'*26)
                 choice = input()
                 if choice == '1':
                     while True:
@@ -77,8 +79,8 @@ while True:
                             all_news.pop(remove_id)
                         else:
                             print('ID inexistente!')
-                            question = input('Ainda quer remover uma noticia? sim/nao')
-                            if question == 'nao':
+                            yes_or_no = input('Ainda quer remover uma noticia? sim/nao')
+                            if yes_or_no == 'nao':
                                 break
 
                 elif choice == '4':
@@ -86,21 +88,29 @@ while True:
                         edit_id = int(input('Informe o ID da notícia que deseja editar:'))
                         if edit_id in all_news:
                             all_news.pop(edit_id)
-                            question4 = input('Edite a notícia:')
-                            all_news[edit_id] = [question4]
-                            yes_no = input('Deseja editar mais alguma coisa? sim/nao')
-                            if yes_no == 'nao':
+                            question = input('Edite a notícia:')
+                            all_news[edit_id] = [question]
+                            yes_or_no = input('Deseja editar mais alguma coisa? sim/nao')
+                            if yes_or_no == 'nao':
+                                break
+                        else:
+                            print('Não existe nenhuma notícia relacionada a esse ID')
+                            yes_or_no = input('Deseha editar mais alguma coisa? sim/nao')
+                            if yes_or_no == 'nao':
                                 break
 
                 elif choice == '5':
                     while True:
-                        list_news = int(input('Informe o ID da notícia para busca-la:'))
-                        if list_news in all_news:
-                            print(all_news[list_news])
+                        search_id = int(input('Informe o ID da notícia para busca-la:'))
+                        if search_id in all_news:
+                            print(all_news[search_id])
+                            yes_or_no = input('Deseja continuar procurando? sim/nao')
+                            if yes_or_no == 'nao':
+                                break
                         else:
                             print('Digite algo válido')
-                            question = input('Deseja continuar procurando? sim/nao')
-                            if question == 'nao':
+                            yes_or_no = input('Deseja continuar procurando? sim/nao')
+                            if yes_or_no == 'nao':
                                 break
 
                 elif choice == '6':
@@ -111,14 +121,14 @@ while True:
         elif usuario in users and password in passwordUSER:
             logged = True
             while True:
-                print('-'*26)
+                print('_'*26)
                 print(
                     '[1]Buscar notícia\n'
                     '[2]Comentar notícia\n'
                     '[3]Curtir notícia\n'
-                    '[4]Logout\n'
+                    '[4]Logout'
                 )
-                print('-' * 26)
+                print('_' * 26)
                 choice = input()
                 if choice == '1':
                     print('Aguarde futuras atualizações.')
@@ -133,6 +143,7 @@ while True:
 
         else:
             print('Usuário ou senha incorretos')
+
     elif choice == '3':
         name = input('Nome:')
         usuario = input('Crie um usuário:')
