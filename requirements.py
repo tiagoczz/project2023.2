@@ -1,7 +1,7 @@
-adms = []
+adms = ['tiago1']
 cpfADMs = []
 emailADMs = []
-passwordADMs = []
+passwordADMs = [12345]
 users = []
 emailUSER = []
 passwordUSER = []
@@ -59,7 +59,7 @@ while True:
                         news_id = int(input('Crie um ID para a sua notícia:'))
                         for i in all_news.keys():
                             if i == news_id:
-                                print('Você não pode informar o mesmo ID:')
+                                print('Você não pode informar o mesmo ID.')
                                 news_id = int(input('Crie um outro ID:'))
 
                         news = input('Insira sua notícia:')
@@ -77,6 +77,10 @@ while True:
                         remove_id = int(input('Informe o ID da notícia para remove-la:'))
                         if remove_id in all_news:
                             all_news.pop(remove_id)
+                            print('Notícia removida.')
+                            yes_or_no = input('Ainda quer remover uma noticia? sim/nao')
+                            if yes_or_no == 'nao':
+                                break
                         else:
                             print('ID inexistente!')
                             yes_or_no = input('Ainda quer remover uma noticia? sim/nao')
@@ -94,8 +98,8 @@ while True:
                             if yes_or_no == 'nao':
                                 break
                         else:
-                            print('Não existe nenhuma notícia relacionada a esse ID')
-                            yes_or_no = input('Deseha editar mais alguma coisa? sim/nao')
+                            print('Não existe nenhuma notícia relacionada a esse ID.')
+                            yes_or_no = input('Deseja editar mais alguma coisa? sim/nao')
                             if yes_or_no == 'nao':
                                 break
 
