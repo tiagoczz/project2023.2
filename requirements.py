@@ -69,9 +69,12 @@ while True:
                             break
 
                 elif choice == '2':
-                    for i in all_news:
-                        print(all_news[i])
-
+                    print('Essas são todas as notícias.')
+                    for i in all_news.values():
+                        no_quotes = str(i).strip("[]'")
+                        print(no_quotes)
+                    print('_'*26)
+                    
                 elif choice == '3':
                     while True:
                         remove_id = int(input('Informe o ID da notícia para remove-la:'))
@@ -107,6 +110,7 @@ while True:
                     while True:
                         search_id = int(input('Informe o ID da notícia para busca-la:'))
                         if search_id in all_news:
+                            search_no_quotes = str(search_id).strip("[]'")
                             print(all_news[search_id])
                             yes_or_no = input('Deseja continuar procurando? sim/nao')
                             if yes_or_no == 'nao':
