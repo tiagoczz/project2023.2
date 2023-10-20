@@ -1,11 +1,9 @@
-adms = []
-cpfADMs = []
+everybody = {'adms': ['tiago2'], 'users': ['tiago1']}
+passwords = {'password_adms': [12345], 'password_users': [12345]}
+all_news = {1234: ['tiago é pego codando em php']}
+#tava pensando em deixar tudo na mesma lista  all_news = {1234: ['tiago é pego codando em php', 'comentário', 'curtidas']}
 emailADMs = []
-passwordADMs = []
-users = []
 emailUSER = []
-passwordUSER = []
-all_news = {}
 while True:
     print(
         '___________MENU___________\n'
@@ -19,28 +17,28 @@ while True:
     if choice == '1':
         name = input('Nome:')
         usuario = input('Crie um usuário:')
-        if usuario in adms or usuario in users:
+        if usuario in everybody['adms'] or usuario in everybody['users']:
             print('Usuario existente, cadastre outro')
         else:
-            adms.append(usuario)
+            everybody['adms'].append(usuario)
             cpf = int(input('CPF:'))
             if len(str(cpf)) == 11:
-                cpfADMs.append(cpf)
                 email = input('Informe um e-mail:')
                 emailADMs.append(email)
                 password = int(input('Crie uma senha:'))
                 if len(str(password)) > 4:
-                    passwordADMs.append(password)
+                    passwords['password_adms'].append(password)
                     print('Cadastro concluído.')
                 else:
                     print('A senha precisa possuir mais de 4 dígitos.')
             else:
                 print('CPF inválido.')
+
     elif choice == '2':
         usuario = input('Usuário:')
         password = int(input('Senha:'))
         logged = False
-        if usuario in adms and password in passwordADMs:
+        if usuario in everybody['adms'] and password in passwords['password_adms']:
             logged = True
             while True:
                 print('_'*26)
@@ -73,8 +71,7 @@ while True:
                     for i in all_news.values():
                         no_quotes = str(i).strip("[]'")
                         print(no_quotes)
-                    print('_'*26)
-                    
+
                 elif choice == '3':
                     while True:
                         remove_id = int(input('Informe o ID da notícia para remove-la:'))
@@ -110,8 +107,7 @@ while True:
                     while True:
                         search_id = int(input('Informe o ID da notícia para busca-la:'))
                         if search_id in all_news:
-                            search_no_quotes = str(search_id).strip("[]'")
-                            print(all_news[search_id])
+                            print(all_news[search_id][0])
                             yes_or_no = input('Deseja continuar procurando? sim/nao')
                             if yes_or_no == 'nao':
                                 break
@@ -123,10 +119,11 @@ while True:
 
                 elif choice == '6':
                     break
+
                 else:
                     print('Não existe esse opção.')
 
-        elif usuario in users and password in passwordUSER:
+        elif usuario in everybody['users'] and password in passwords['password_users']:
             logged = True
             while True:
                 print('_'*26)
@@ -139,13 +136,53 @@ while True:
                 print('_' * 26)
                 choice = input()
                 if choice == '1':
-                    print('Aguarde futuras atualizações.')
+                    while True:
+                        search_id = int(input('Informe o ID da notícia para busca-la:'))
+                        if search_id in all_news:
+                            print(all_news[search_id][0])
+                            yes_or_no = input('Deseja continuar procurando? sim/nao')
+                            if yes_or_no == 'nao':
+                                break
+                        else:
+                            print('Não existe nenhuma notícia com esse ID.')
+                            yes_or_no = input('Deseja continuar procurando? sim/nao')
+                            if yes_or_no == 'nao':
+                                break
+
                 elif choice == '2':
-                    print('Aguarde futuras atualizações.')
+                    while True:
+                        comment_id = int(input('Informe o ID da notícia para comentar:'))
+                        if comment_id in all_news:
+                            comment = input('Comentário:')
+                            all_news[comment_id].append(comment)
+                            yes_or_no = input('Deseja continuar comentando? sim/nao')
+                            if yes_or_no == 'nao':
+                                break
+                        else:
+                            print('Não existe nenhuma notícia com esse ID.')
+                            yes_or_no = input('Ainda quer comentar? sim/nao')
+                            if yes_or_no == 'nao':
+                                break
+
                 elif choice == '3':
-                    print('Aguarde futuras atualizações.')
+                    while True:
+                        like_id = int(input('Informe o ID da notícia para comentar:'))
+                        if like_id in all_news:
+                            like = input('Para curtir digite 1:')
+                            if like == '1':
+                                all_news[like_id].append(like)
+                                yes_or_no = input('Deseja curtir mais alguma notícia? sim/nao')
+                                if yes_or_no == 'nao':
+                                    break
+                        else:
+                            print('Não existe nenhuma notícia com esse ID.')
+                            yes_or_no = input('Deseja curtir mais alguma notícia? sim/nao')
+                            if yes_or_no == 'nao':
+                                break
+
                 elif choice == '4':
                     break
+
                 else:
                     print('Não existe essa opção.')
 
@@ -155,20 +192,22 @@ while True:
     elif choice == '3':
         name = input('Nome:')
         usuario = input('Crie um usuário:')
-        if usuario in adms or usuario in users:
+        if usuario in everybody['adms'] or usuario in everybody['users']:
             print('Usuário repetido, cadastre outro.')
         else:
-            users.append(usuario)
+            everybody['users'].append(usuario)
             email = input('Informe seu e-mail:')
             emailUSER.append(email)
             password = int(input('Crie uma senha:'))
             if len(str(password)) > 4:
-                passwordUSER.append(password)
-                print('Cadastro concluído:')
+                passwords['password_users'].append(password)
+                print('Cadastro concluído.')
             else:
                 print('A senha precisa possuir mais de 4 dígitos.')
+
     elif choice == '0':
         break
+
     else:
         print('Não existe essa opção.')
         break
