@@ -29,4 +29,4 @@ def menu_user(all_news, body_news, data_news, send_email):
             break
 
         else:
-            print('Não existe essa opção.')
+            print('Opção inválida.')
