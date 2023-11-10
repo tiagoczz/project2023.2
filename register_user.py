@@ -1,15 +1,14 @@
-def register_user(everybody, passwords, emailUSER):
+def register_user(users):
     name = input('Nome:')
-    usuario = input('Crie um usuário:')
-    if usuario in everybody['adms'] or usuario in everybody['users']:
-        print('Usuário repetido, cadastre outro.')
-    else:
-        everybody['users'].append(usuario)
-        email = input('Informe seu e-mail:')
-        emailUSER.append(email)
-        password = int(input('Crie uma senha:'))
-        if len(str(password)) > 4:
-            passwords['password_users'].append(password)
-            print('Cadastro concluído.')
+    email = input('Informe seu email:')
+    while True:
+        usuario = input('Crie um usuário:')
+        if usuario not in users:
+            password = int(input('Crie uma senha:'))
+            if len(str(password)) > 4:
+                users[usuario] = [password, '2']
+                print('\033[92mCadastro concluído.\033[0m')
+            else:
+                print('\033[91mSenha deve ter pelo menos 4 dígitos!\033[0m')
         else:
-            print('A senha precisa possuir mais de 4 dígitos.')
+            print('\033[91mUsuário em uso. Tente outro!\033[0m')
