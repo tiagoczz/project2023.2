@@ -4,12 +4,15 @@ from login import login_adm_user
 from menu_adm import *
 from menu_user import *
 
-everybody = {'adms': ['tiago2'], 'users': ['tiago1']}
-passwords = {'password_adms': [12345], 'password_users': [12345]}
-all_news = {1234: ['tiago é pego codando em php']}
-body_news = {1234: 'qwertyuiopasdfghjklzxcvbnmqwertyuiopasdfghjkl'}
-data_news = {1234: ['tiagoeliashkss@gmail.com', '30/10/2022']}
-emailUSER = []
+id = [0]
+
+article = 'Em um desdobramento surpreendente, Tiago, um renomado desenvolvedor de software, foi pego em flagrante ' \
+          'codificando em PHP, uma linguagem de programação que ele havia criticado publicamente em várias ocasiões.'
+
+
+users = {'tiago1': [12345, '1'], 'tiago2': [12345, '2']}
+perfil_adm = {'tiago1': ['Tiago Elias Abrantes Silva', 'tiagoeliashkss@gmail.com']}
+news = {'tiago1': {id[0]: ['tiago é pego codando em php', article, ['não achei que ele fosse capaz disso'], 'curtidas', '08/11/2023']}}
 
 while True:
     print(
@@ -22,23 +25,23 @@ while True:
     print('_'*26)
     choice = input()
     if choice == '1':
-        tipo = login_adm_user(everybody, passwords)
+        tipo, usuario = login_adm_user(users)
         if tipo == 1:
-            menu_adm(all_news, body_news, data_news)
+            menu_adm(news, id, usuario)
         elif tipo == 2:
             menu_user(all_news, body_news, data_news, send_email)
         else:
-            print('Usuário e senhas inválidos')
+            print('\033[91mUsuário e senhas inválidos!\033[0m')
 
     elif choice == '2':
-        register_adm(everybody, passwords)
+        register_adm(users, perfil_adm)
 
     elif choice == '3':
-        register_user(everybody, passwords, emailUSER)
+        register_user(users)
 
     elif choice == '0':
         break
 
     else:
-        print('Não existe essa opção.')
+        print('\033[91mOpção inválida!\033[0m')
         break
