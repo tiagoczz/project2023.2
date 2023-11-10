@@ -3,7 +3,8 @@ import email.message
 
 
 #essa def envia o e-mail para o admin, informando que sua notícia teve um comentário e exibe qual foi o comentário
-def send_email(email_adm, comment, id):
+# vou ajeitar dps
+'''def send_email(email_adm, comment, id):
     x = email_adm[id][0]
     y = comment[id][1]
 
@@ -20,7 +21,7 @@ def send_email(email_adm, comment, id):
 
     s.login(msg['From'], password)
     s.sendmail(msg['From'], [msg['To']], msg.as_string().encode('utf-8'))
-    print('E-mail enviado')
+    print('E-mail enviado')'''
 
 
 #essa def serve para o usuário buscar uma noticia
@@ -84,3 +85,4 @@ def user_list_news(all_news, body_news):
     for key, valor in all_news.items():
         print(f'ID({key}): {valor[0]}')
         print(f'{body_news[key]}')
+        print(f'Comentários: {valor[1]}')
