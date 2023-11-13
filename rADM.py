@@ -26,7 +26,7 @@ def adm_list_news(news):
             print(f'Artigo: {y[z][1]}')
             comment = ', '. join(y[z][2])
             print(f'Comentários: {comment}') if comment else ''
-            print(f'{y[z][3]}❤️')
+            print(f'{len(y[z][3])}❤️')
             print('_'*26)
 
 
@@ -93,14 +93,14 @@ def adm_edit_news(news, usuario):
 #essa def serve para buscar notícias
 def adm_search_news(news, usuario):
     while True:
-        id_to_search = int(input('Informe o id da noticia para busca-la:'))
-        if id_to_search not in news[usuario]:
+        id_to_search = int(input('Informe o ID da notícia para buscá-la:'))
+        if usuario not in news or id_to_search not in news[usuario]:
             print('\033[91mID inexistente!\033[0m')
+            continue
         else:
-            for x, y in news.items():
-                print(f'\033[96mAutor: {x}\033[0m')
-                for z in y:
-                    print(f'Título: {y[z][0]}')
-                    print(f'Artigo: {y[z][1]}')
-                    print('_' * 26)
+            print(f'\033[96mAutor: {usuario}\033[0m')
+            print(f'Título: {news[usuario][id_to_search][0]}')
+            print(f'Artigo: {news[usuario][id_to_search][1]}')
+            print('_' * 26)
+
         break
