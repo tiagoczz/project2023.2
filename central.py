@@ -12,7 +12,7 @@ article = 'Em um desdobramento surpreendente, Tiago, um renomado desenvolvedor d
 
 users = {'tiago1': [12345, '1'], 'tiago2': [12345, '2']}
 perfil_adm = {'tiago1': ['Tiago Elias Abrantes Silva', 'tiagoeliashkss@gmail.com']}
-news = {'tiago1': {id[0]: ['tiago é pego codando em php', article, ['não achei que ele fosse capaz disso'], 'curtidas', '08/11/2023']}}
+news = {'tiago1': {id[0]: ['tiago é pego codando em php', article, ['não achei que ele fosse capaz disso'], [], '08/11/2023']}}
 
 while True:
     print(
@@ -29,7 +29,7 @@ while True:
         if tipo == 1:
             menu_adm(news, id, usuario)
         elif tipo == 2:
-            menu_user(all_news, body_news, data_news, send_email)
+            menu_user(news)
         else:
             print('\033[91mUsuário e senhas inválidos!\033[0m')
 
