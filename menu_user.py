@@ -1,7 +1,7 @@
 from rUSER import*
 
 
-def menu_user(all_news, body_news, data_news, send_email):
+def menu_user(news):
     while True:
         print('_' * 26)
         print(
@@ -14,16 +14,16 @@ def menu_user(all_news, body_news, data_news, send_email):
         print('_' * 26)
         choice = input()
         if choice == '1':
-            user_search_news(all_news, body_news, data_news, send_email)
+            user_search_news(news)
 
         elif choice == '2':
-            user_comment_news(all_news, data_news, send_email)
+            user_comment_news(news)
 
         elif choice == '3':
-            user_like_news(all_news)
+            user_like_news(news)
 
         elif choice == '4':
-            user_list_news(all_news, body_news)
+            user_list_news(news)
 
         elif choice == '5':
             break
