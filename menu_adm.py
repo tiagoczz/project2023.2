@@ -27,7 +27,7 @@ def menu_adm(news, id, usuario):
             adm_edit_news(news, usuario)
 
         elif choice == '5':
-            adm_search_news(news, usuario)
+            adm_search_news(news)
 
         elif choice == '6':
             break
