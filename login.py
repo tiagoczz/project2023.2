@@ -3,7 +3,7 @@
 def login_adm_user(users):
     tipo = 0
     usuario = input('Usuário:')
-    password = input('Senha:')
+    password = int(input('Senha:'))
     if usuario in users and password == users[usuario][0]:
         if users[usuario][1] == '1':
             tipo = 1
