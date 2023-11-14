@@ -6,7 +6,7 @@ def register_adm(users, perfil_adm):
         while True:
             usuario = input('Crie um usuário:')
             if usuario not in users:
-                password = input('Crie uma senha:')
+                password = int(input('Crie uma senha:'))
                 if len(str(password)) >= 4:
                     users[usuario] = [password, '1']
                     perfil_adm[usuario] = [name, email]
