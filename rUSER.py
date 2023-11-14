@@ -1,9 +1,9 @@
 #def usada na def user_search_news
 def comment(news, id_for_add_comment):
-    comment = input('Comentário:')
+    comentario = input('Comentário:')
     for x, y in news.items():
         if id_for_add_comment in y:
-            news[x][id_for_add_comment][2].append(comment)
+            news[x][id_for_add_comment][2].append(comentario)
             print('\033[92mComentário adicionado\033[0m')
 
 
@@ -50,7 +50,7 @@ def user_comment_news(news):
         comentario = str(input('Comentário:'))
         for x, y in news.items():
             if comment_id in y:
-                news[x][comment_id][2].append(comment)
+                news[x][comment_id][2].append(comentario)
                 print('\033[92mComentário adicionado\033[0m')
                 found = True
                 junk = input('Deseja fazer outro comentário? [sim/nao]')
@@ -93,7 +93,7 @@ def user_list_news(news):
             print(f'Publicado em {y[z][4]}')
             print(f'Título: {y[z][0]}')
             print(f'Artigo: {y[z][1]}')
-            comment = ', '.join(y[z][2])
-            print(f'Comentários: {comment}') if comment else ''
+            a = ', '.join(y[z][2])
+            print(f'Comentários: {a}') if comment else ''
             print(f'{len(y[z][3])}❤️')
             print('_' * 26)
