@@ -9,7 +9,6 @@ id = [0]
 article = 'Em um desdobramento surpreendente, Tiago, um renomado desenvolvedor de software, foi pego em flagrante ' \
           'codificando em PHP, uma linguagem de programação que ele havia criticado publicamente em várias ocasiões.'
 
-
 users = {'tiago1': [12345, '1'], 'tiago2': [12345, '2']}
 perfil_adm = {'tiago1': ['Tiago Elias Abrantes Silva', 'tiagoeliashkss@gmail.com']}
 news = {'tiago1': {id[0]: ['tiago é pego codando em php', article, ['não achei que ele fosse capaz disso'], [], '08/11/2023']}}
