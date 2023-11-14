@@ -7,9 +7,9 @@ def adm_insert_news(news, id, usuario):
         news_id = id[0] + 1
         id[0] = news_id
         if usuario in news:
-            news[usuario][news_id] = [title, article, [], 'curtidas', data]
+            news[usuario][news_id] = [title, article, [], [], data]
         else:
-            news[usuario] = {news_id: [title, article, [], 'curtidas', data]}
+            news[usuario] = {news_id: [title, article, [], [], data]}
         print('\033[92mNotícia adicionada!\033[0m')
         y = input('Deseja criar mais uma notícia? [sim/nao]')
         if y == 'nao':
@@ -91,16 +91,17 @@ def adm_edit_news(news, usuario):
 
 
 #essa def serve para buscar notícias
-def adm_search_news(news, usuario):
+def adm_search_news(news):
     while True:
+        found = False
         id_to_search = int(input('Informe o ID da notícia para buscá-la:'))
-        if usuario not in news or id_to_search not in news[usuario]:
+        for x, y in news.items():
+            if id_to_search in y:
+                print(f'\033[96mAutor: {x}\033[0m')
+                print(f'Título: {y[id_to_search][0]}')
+                print(f'Artigo: {y[id_to_search][1]}')
+                print('_' * 26)
+                found = True
+        if not found:
             print('\033[91mID inexistente!\033[0m')
-            continue
-        else:
-            print(f'\033[96mAutor: {usuario}\033[0m')
-            print(f'Título: {news[usuario][id_to_search][0]}')
-            print(f'Artigo: {news[usuario][id_to_search][1]}')
-            print('_' * 26)
-
         break
