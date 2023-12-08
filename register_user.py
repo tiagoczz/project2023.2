@@ -1,4 +1,5 @@
-def register_user(users):
+#essa def serve para registrar o usuario
+def register_user(users, perfis):
     name = input('Nome:')
     email = input('Informe seu email:')
     while True:
@@ -7,6 +8,7 @@ def register_user(users):
             password = int(input('Crie uma senha:'))
             if len(str(password)) > 4:
                 users[usuario] = [password, '2']
+                perfis[usuario] = ['2', name, email]
                 print('\033[92mCadastro concluído.\033[0m')
                 break
             else:
