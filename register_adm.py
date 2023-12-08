@@ -1,4 +1,5 @@
-def register_adm(users, perfil_adm):
+#essa def serve para registrar um adm
+def register_adm(users, perfis):
     name = input('Nome:')
     email = input('E-mail:')
     cpf = int(input('CPF:'))
@@ -9,7 +10,7 @@ def register_adm(users, perfil_adm):
                 password = int(input('Crie uma senha:'))
                 if len(str(password)) >= 4:
                     users[usuario] = [password, '1']
-                    perfil_adm[usuario] = [name, email]
+                    perfis[usuario] = ['1', name, email, []]
                     print('\033[92mCadastro Concluído.\033[0m')
                     break
                 else:
