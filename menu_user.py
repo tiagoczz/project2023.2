@@ -1,7 +1,7 @@
 from rUSER import*
 
 
-def menu_user(news):
+def menu_user(news, usuario, perfis):
     while True:
         print('_' * 26)
         print(
@@ -9,7 +9,8 @@ def menu_user(news):
             '[2]Comentar\n'
             '[3]Curtir\n'
             '[4]Listar\n'
-            '[5]Logout'
+            '[5]Favoritar autor\n'
+            '[6]Logout'
         )
         print('_' * 26)
         choice = input()
@@ -26,6 +27,9 @@ def menu_user(news):
             user_list_news(news)
 
         elif choice == '5':
+            user_favorite_author(usuario, perfis)
+
+        elif choice == '6':
             break
 
         else:
