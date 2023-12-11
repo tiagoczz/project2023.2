@@ -1,28 +1,45 @@
 import smtplib
-import email.message
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 
-#essa def serve para enviar o email
+#def para enviar emails
 def send_email(title, usuario, perfis):
     for i, j in perfis.items():
         if j[0] == '1':
             for k in j[3]:
-                msg = email.message.Message()
-                msg['Subject'] = f'{usuario} postou uma nova notícia!'
-                msg['From'] = 'jamesbot.ifpb@gmail.com'
-                msg['To'] = k
-                password = 'lied uthj dsde rdax'
-                msg.add_header('Content-type', 'txt/html')
-                msg.set_payload(title)
+                #configurações do servidor SMTP do gmail
+                servidor_smtp = "smtp.gmail.com"
+                porta_smtp = 587
 
-                s = smtplib.SMTP('smtp.gmail.com: 587')
-                s.starttls()
-
-                s.login(msg['From'], password)
-                s.sendmail(msg['From'], [msg['To']], msg.as_string().encode('utf-8'))
+                #informações da conta de e-mail
+                sender_email = SEU EMAIL
+                sender_password = SUA SENHA
 
 
-#essa def serve para inserir noticias
+                mensagem = MIMEMultipart()
+                mensagem["From"] = sender_email
+                mensagem["To"] = k
+                mensagem["Subject"] = f'{usuario} postou uma nova notícia!'
+
+                #adicionando corpo da mensagem
+                mensagem.attach(MIMEText(title, "plain"))
+
+                #configurando a conexao SMTP
+                servidor = smtplib.SMTP(servidor_smtp, porta_smtp)
+                servidor.starttls()
+
+                #logando na conta de e-mail
+                servidor.login(sender_email, sender_password)
+
+                #enviando o e-mail
+                servidor.sendmail(sender_email, k, mensagem.as_string())
+
+                #fechando a conexao SMTP
+                servidor.quit()
+
+
+#def para inserir noticias
 def adm_insert_news(news, id, usuario, perfis):
     while True:
         title = input('Título:')
@@ -31,11 +48,16 @@ def adm_insert_news(news, id, usuario, perfis):
         news_id = id[0] + 1
         id[0] = news_id
 
+        #verifica se o usuario ja postou alguma noticia
         if usuario in news:
+            #se ja postou alguma noticia ele cria um novo id
             news[usuario][news_id] = [title, article, [], [], data]
         else:
+            #senao ele cria um nova chave
             news[usuario] = {news_id: [title, article, [], [], data]}
         print('\033[92mNotícia adicionada!\033[0m')
+
+        #envia um email contendo o titulo da noticia para todos os usuario que o favoritaram
         send_email(title, usuario, perfis)
 
         create_more_news = input('Deseja criar mais uma notícia? [sim/nao]')
@@ -43,12 +65,14 @@ def adm_insert_news(news, id, usuario, perfis):
             break
 
 
-#essa def lista todas as notícias
+#def para listar todas as noticias do adm
 def adm_list_news(news, usuario):
     for x, y in news.items():
         for z in y:
-
+            #verifica se a noticia que ira ser listada é do adm
             if x == usuario:
+                #printa todas as informações da noticia
+                print(f'ID: {z}')
                 print(f'Autor: {x}')
                 print(f'Publicado em {y[z][4]}')
                 print(f'Título: {y[z][0]}')
@@ -59,7 +83,7 @@ def adm_list_news(news, usuario):
                 print('_'*26)
 
 
-#essa def remove uma notícia
+#def para remover as noticias do adm
 def adm_remove_news(news, usuario):
     while True:
         remove_options = int(input(
@@ -69,7 +93,9 @@ def adm_remove_news(news, usuario):
         if remove_options == 1:
             id_to_remove = int(input('Informe o id da noticia para remove-la:'))
 
+            #verifica se o id informado existe no dicionario
             if id_to_remove in news[usuario]:
+                #remove a noticia
                 news[usuario].pop(id_to_remove)
                 print('\033[92mNotícia removida!\033[0m')
                 y = input('Deseja remover mais notícias? [sim/nao]')
@@ -80,6 +106,7 @@ def adm_remove_news(news, usuario):
                 break
 
         elif remove_options == 2:
+            #remove todas as noticias postadas pelo o adm
             news.pop(usuario)
             print('\033[92mTodas as notícia foram removidas!\033[0m')
             break
@@ -89,10 +116,11 @@ def adm_remove_news(news, usuario):
             break
 
 
-#essa def é para editar uma notícia
+#def para editar a noticia do adm
 def adm_edit_news(news, usuario):
     while True:
         id_to_edit = int(input('Informe o id da noticia para edita-la:'))
+        #verifica se o id informado existe no dicionario
         if id_to_edit in news[usuario]:
             edit_options = int(input(
                 '[1]Editar título\n'
@@ -102,17 +130,20 @@ def adm_edit_news(news, usuario):
 
             if edit_options == 1:
                 new_title = input('Novo título:')
+                #edita apenas o titulo
                 news[usuario][id_to_edit][0] = new_title
                 print('\033[92mNotícia salva!\033[0m')
                 break
 
             elif edit_options == 2:
                 new_article = input('Novo corpo:')
+                #edita o corpo da noticia
                 news[usuario][id_to_edit][1] = new_article
                 print('\033[92mNotícia salva!\033[0m')
                 break
 
             elif edit_options == 3:
+                #edita toda a noticia
                 new_title = input('Novo título:')
                 news[usuario][id_to_edit][0] = new_title
                 new_article = input('Novo corpo:')
@@ -127,26 +158,30 @@ def adm_edit_news(news, usuario):
             print('\033[91mID inexistente!\033[0m')
 
 
-#essa def serve para buscar noticias
+#def para buscar noticias
 def adm_search_news(news):
-    while True:
-        found = False
-        id_to_search = int(input('Informe o ID da notícia para buscá-la:'))
-
-        for x, y in news.items():
-            if id_to_search in y:
-                print(f'\033[96mAutor: {x}\033[0m')
-                print(f'Título: {y[id_to_search][0]}')
-                print(f'Artigo: {y[id_to_search][1]}')
-                print('_' * 26)
+    found = False
+    search = input('Pesquisa:')
+    #procura search no indice 0 (contem o titulo) da lista, se tiver printa toda a noticia
+    for autor, dicionario in news.items():
+        for id_news, lista in dicionario.items():
+            if search in lista[0]:
                 found = True
+                print(f'ID: {id_news}')
+                print(f'Autor: {autor}')
+                print(f'Publicado em {lista[4]}')
+                print(f'Título: {lista[0]}')
+                print(f'Artigo: {lista[1]}')
+                comment = ', '.join(lista[2])
+                print(f'Comentários: {comment}') if comment else ''
+                print(f'{len(lista[3])}❤️')
+                print('_' * 26)
 
-        if not found:
-            print('\033[91mID inexistente!\033[0m')
-        break
+    if not found:
+        print('Nenhuma notícia encontrada!')
 
 
-#essa def serve para rankear os noticias mais curtidas do usuario(adm)
+#def para rankear as noticias mais curtidas do adm
 def adm_rank_news(news, usuario, my_news_rank):
     if usuario in news:
         for i, j in news[usuario].items():
@@ -176,7 +211,7 @@ def adm_rank_news(news, usuario, my_news_rank):
         print(f'\033[91m{usuario} não publicou nenhuma notícia!\033[0m')
 
 
-#essa def serve para mostrar o rank com as noticias com mais curtidas
+#def para rankear todas as noticias
 def adm_geral_news_rank(news, geral_news_rank):
     for i, j in news.items():
         for k, m in j.items():
@@ -205,7 +240,7 @@ def adm_geral_news_rank(news, geral_news_rank):
         print('_'*26)
 
 
-#essa def serve para fazer o download de todas as noticias do adm
+#def para fazer download das noticias do adm
 def adm_download_news(news, list_download_news, usuario):
     for x, y in news.items():
         for z in y:
