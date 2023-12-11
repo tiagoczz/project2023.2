@@ -13,24 +13,28 @@ def menu_user(news, usuario, perfis):
             '[6]Logout'
         )
         print('_' * 26)
-        choice = input()
-        if choice == '1':
-            user_search_news(news)
+        try:
+            choice = int(input())
+            if choice == 1:
+                user_search_news(news)
 
-        elif choice == '2':
-            user_comment_news(news)
+            elif choice == 2:
+                user_comment_news(news)
 
-        elif choice == '3':
-            user_like_news(news)
+            elif choice == 3:
+                user_like_news(news)
 
-        elif choice == '4':
-            user_list_news(news)
+            elif choice == 4:
+                user_list_news(news)
 
-        elif choice == '5':
-            user_favorite_author(usuario, perfis)
+            elif choice == 5:
+                user_favorite_author(usuario, perfis)
 
-        elif choice == '6':
-            break
+            elif choice == 6:
+                break
 
-        else:
-            print('Opção inválida.')
+            else:
+                print('\033[91mOpção inválida!\033[0m')
+
+        except ValueError:
+            print('\033[91mOpção inválida!\033[0m')
