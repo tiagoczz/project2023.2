@@ -13,8 +13,8 @@ def send_email(title, usuario, perfis):
                 porta_smtp = 587
 
                 #informações da conta de e-mail
-                sender_email = 'jamesbot.ifpb@gmail.com'
-                sender_password = 'lied uthj dsde rdax'
+                sender_email = 'SEU EMAIL'
+                sender_password = 'SUA SENHA'
 
                 mensagem = MIMEMultipart()
                 mensagem["From"] = sender_email
