@@ -13,9 +13,8 @@ def send_email(title, usuario, perfis):
                 porta_smtp = 587
 
                 #informações da conta de e-mail
-                sender_email = SEU EMAIL
-                sender_password = SUA SENHA
-
+                sender_email = 'jamesbot.ifpb@gmail.com'
+                sender_password = 'lied uthj dsde rdax'
 
                 mensagem = MIMEMultipart()
                 mensagem["From"] = sender_email
@@ -184,11 +183,15 @@ def adm_search_news(news):
 #def para rankear as noticias mais curtidas do adm
 def adm_rank_news(news, usuario, my_news_rank):
     if usuario in news:
+        #percorre todas as noticias do usuario
         for i, j in news[usuario].items():
+            #guarda o nome de usuario e quantidade de curtidas da noticia em um dicionario
             my_news_rank[i] = len(j[3])
 
+        #converte o dicionario para uma lista de tuplas
         list_news_rank = list(my_news_rank.items())
 
+        #ordena a lista com base na quantidade de curtidas em ordem decrescente
         z = len(list_news_rank)
         for x in range(z):
             for y in range(0, z - x - 1):
@@ -197,6 +200,7 @@ def adm_rank_news(news, usuario, my_news_rank):
                     list_news_rank[y] = list_news_rank[y + 1]
                     list_news_rank[y + 1] = aux
 
+        #itera sobre a lista ordenada e imprime informações de cada noticia
         for a in list_news_rank:
             print(f'Autor: {usuario}')
             print(f'Publicado em: {news[usuario][a[0]][4]}')
@@ -213,49 +217,64 @@ def adm_rank_news(news, usuario, my_news_rank):
 
 #def para rankear todas as noticias
 def adm_geral_news_rank(news, geral_news_rank):
+    #percorre percorre todas as noticias
+    a = 0
     for i, j in news.items():
         for k, m in j.items():
-            geral_news_rank[i] = [k, len(m[3])]
+            #a variavel "a" cria automaticamente uma chave cada noticia no dicionario geral_news_rank
+            # guarda o nome de usuario, o id e a quantidade de curtidas da noticia em um dicionario
+            geral_news_rank[a] = [i, k, len(m[3])]
+            a += 1
 
+    # converte o dicionario para uma lista de tuplas
     list_geral_rank = list(geral_news_rank.items())
 
+    # ordena a lista com base na quantidade de curtidas em ordem decrescente
     z = len(list_geral_rank)
     for x in range(z):
         for y in range(0, z - x - 1):
-            if list_geral_rank[y][1][1] < list_geral_rank[y + 1][1][1]:
+            if list_geral_rank[y][1][2] < list_geral_rank[y + 1][1][2]:
                 aux = list_geral_rank[y]
                 list_geral_rank[y] = list_geral_rank[y + 1]
                 list_geral_rank[y + 1] = aux
 
-    for a in list_geral_rank:
-        author = a[0]
-        id_news = a[1][0]
+    # itera sobre a lista ordenada e imprime informações de cada noticia
+    for b in list_geral_rank:
+        author = b[1][0]
+        id_news = b[1][1]
         print(f'Autor: {author}')
-        print(f'Publicado em: {news[author][id_news][4]}')
+        print(f'Publicado em {news[author][id_news][4]}')
         print(f'Título: {news[author][id_news][0]}')
         print(f'Artigo: {news[author][id_news][1]}')
         comment = ' ,'.join(news[author][id_news][2])
         print(f'Comentários: {comment}') if comment else ''
-        print(f'{a[1][1]}❤️')
-        print('_'*26)
+        print(f'{b[1][2]} ❤️')
+        print('_' * 26)
 
 
 #def para fazer download das noticias do adm
 def adm_download_news(news, list_download_news, usuario):
+    #itera sobre as noticias do dicionario de noticias
     for x, y in news.items():
+        #itera sobre os ids das noticias
         for z in y:
+            #verifica se o autor da noticia e igual ao usuario logado
             if x == usuario:
+                #coleta informacoes da noticia e adiciona a uma lista
                 author = x + '\n'
                 title = y[z][0] + '\n'
                 article = y[z][1] + '\n'
                 list_download_news.append({'Autor': author, 'Título': title, 'Artigo': article})
 
+    #cria um arquivo de texto com informacoes das noticias
     with open(f'{usuario}.txt', 'w') as f:
+        #itera sobre a lista de informacoes das noticias
         for a in list_download_news:
             b = a['Autor']
             c = a['Título']
             d = a['Artigo']
 
+            #formatacao das informacoes e gravacao no arquivo
             texto = f'Autor: {b}'
             texto += f'Titulo: {c}'
             texto += f'Artigo: {d}'
